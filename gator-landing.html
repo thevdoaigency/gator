@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATOR — Government Efficiency Platform</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-surface: #121212;
+            --text-primary: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --accent: #ff6b35;
+            --accent-light: #ff8555;
+            --border: #242424;
+            --success: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1.25rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            max-width: 60ch;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        section:first-of-type {
+            border-top: none;
+            padding-top: 4rem;
+        }
+
+        /* Header / Hero */
+        .hero {
+            padding: 5rem 0 6rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-subtext {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 55ch;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        /* Problem section */
+        .problem {
+            background: var(--bg-surface);
+            padding: 5rem 2rem;
+            margin: 4rem -2rem 0;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2.5rem;
+        }
+
+        .problem-stat {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+        }
+
+        .problem-stat h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-stat p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Solution section */
+        .solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .solution-diagram {
+            background: var(--bg-surface);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            overflow-x: auto;
+        }
+
+        .solution-diagram code {
+            color: var(--accent);
+        }
+
+        /* Customers section */
+        .customers {
+            text-align: center;
+        }
+
+        .customers h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .customers-subtext {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .customer-logos {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .customer-logo {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            padding: 1.5rem 2.5rem;
+            border: 1px solid var(--border);
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .customer-logo:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* How it works */
+        .how-it-works {
+            background: var(--bg-surface);
+            padding: 5rem 2rem;
+            margin: 4rem -2rem 0;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: var(--bg-dark);
+            color: var(--accent);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 700;
+            padding-right: 2px;
+        }
+
+        .step h3 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        /* Results section */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .result-card {
+            background: var(--bg-surface);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-number {
+            font-size: 2.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* CTA section */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: var(--bg-surface);
+            margin: 4rem -2rem 0;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            margin: 0 auto 2rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .solution {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 3rem 0 4rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .problem, .how-it-works, .cta-section {
+                margin-left: -2rem;
+                margin-right: -2rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .customer-logos {
+                gap: 1rem;
+            }
+
+            .customer-logo {
+                min-width: 150px;
+                padding: 1rem;
+            }
+        }
+
+        /* Utility */
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .mono {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <h1>Government <span>efficiency</span> at scale.</h1>
+            <p class="hero-subtext">
+                Municipalities waste billions on fragmented procurement. Supplies. Health equipment. Medical services. Each department buys separately. Prices never drop. We aggregate their orders and put them to a reverse auction.
+            </p>
+            <button class="cta-primary">Request Demo</button>
+        </section>
+
+        <!-- Problem -->
+        <section class="problem">
+            <h2>The real problem.</h2>
+            <div class="problem-grid">
+                <div class="problem-stat">
+                    <h3>$15B+</h3>
+                    <p>Annual municipal procurement across supplies and health—fragmented across departments.</p>
+                </div>
+                <div class="problem-stat">
+                    <h3>40+ departments</h3>
+                    <p>Police, fire, health, schools, prisons. Each orders independently. No negotiation leverage.</p>
+                </div>
+                <div class="problem-stat">
+                    <h3>20-35% markup</h3>
+                    <p>Typical premium on purchases made individually. Vendors price for low volume.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution -->
+        <section>
+            <h2>How <span class="text-accent">GATOR</span> works.</h2>
+            <div class="solution">
+                <div>
+                    <h3>Aggregate. Auction. Save.</h3>
+                    <p>
+                        We consolidate orders from police, fire, schools, prisons, health departments—across any municipality and category. Supplies. Medical equipment. PPE. Then we put the aggregate to a blind reverse auction with competing vendors.
+                    </p>
+                    <p>
+                        The result: departments get enterprise pricing without the enterprise overhead.
+                    </p>
+                </div>
+                <div class="solution-diagram">
+                    <code>SUPPLIES:<br/>
+                    Police → toilet paper<br/>
+                    Fire → toilet paper<br/>
+                    Health → toilet paper<br/>
+                    Parks → toilet paper<br/>
+                    <br/>
+                    HEALTH:<br/>
+                    Health Dept → PPE<br/>
+                    Schools → medical supplies<br/>
+                    Prisons → equipment<br/>
+                    <br/>
+                    GATOR aggregates → <br/>
+                    500K+ units to market<br/>
+                    Vendors compete<br/>
+                    City saves $200K+</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customers -->
+        <section class="customers">
+            <h2>Already deployed.</h2>
+            <p class="customers-subtext">Real municipalities. Real results.</p>
+            <div class="customer-logos">
+                <div class="customer-logo">TERRE HAUTE</div>
+                <div class="customer-logo">DADE COUNTY</div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="how-it-works">
+            <h2>The process.</h2>
+            <div class="steps">
+                <div class="step">
+                    <h3>Connect</h3>
+                    <p>Plug into existing procurement systems. No departments need to change their workflow.</p>
+                </div>
+                <div class="step">
+                    <h3>Aggregate</h3>
+                    <p>GATOR pulls all departmental orders for the same categories in a rolling window.</p>
+                </div>
+                <div class="step">
+                    <h3>Auction</h3>
+                    <p>Vendors see total volume and compete for the contract. Margins compress fast.</p>
+                </div>
+                <div class="step">
+                    <h3>Distribute</h3>
+                    <p>Orders fulfill per department needs. One contract, aggregate pricing, zero friction.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section>
+            <h2>What the numbers look like.</h2>
+            <div class="results">
+                <div class="result-card">
+                    <div class="result-number">27%</div>
+                    <div class="result-label">Average savings, first year</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">$120K–$450K</div>
+                    <div class="result-label">Per municipality annually (based on spend category)</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">3 months</div>
+                    <div class="result-label">Time to ROI (on system implementation)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2>Supplies. Health. Everything.</h2>
+            <p>Procurement across every category. Supplies, medical equipment, health services, fleet, IT—the same reverse auction engine works. We start where the waste is biggest.</p>
+            <button class="cta-primary">Talk to us</button>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                GATOR | Government Efficiency Platform<br/>
+                <a href="mailto:contact@gator.gov">contact@gator.gov</a> | 
+                <a href="#">Request Demo</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for buttons
+        document.querySelectorAll('.cta-primary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(10, 10, 10, 0.95);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                `;
+                modal.innerHTML = `
+                    <div style="background: var(--bg-surface); padding: 2rem; border: 1px solid var(--border); max-width: 500px; color: var(--text-primary);">
+                        <h2 style="font-family: 'Courier New', monospace; margin-bottom: 1rem;">Demo Request</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Coming soon. For early access, contact us directly.</p>
+                        <p style="margin-bottom: 1.5rem;">
+                            <strong>Email:</strong> <span style="color: var(--accent);">contact@gator.gov</span>
+                        </p>
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: var(--accent); color: var(--bg-dark); border: none; padding: 0.75rem 1.5rem; cursor: pointer; font-weight: 600; font-family: 'Courier New', monospace;">Close</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            });
+        });
+    </script>
+</body>
+</html>
