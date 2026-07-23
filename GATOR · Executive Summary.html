@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)file:///C:/Users/RVollrath/Downloads/gator_executive_summary%20(1).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GATOR · Executive Summary</title>
+<style>
+  :root{
+    --bg:#080A09;
+    --panel:#0E1210;
+    --hero:#0D130F;
+    --row-hover:#12180F;
+    --line:rgba(255,255,255,.075);
+    --line-2:rgba(255,255,255,.12);
+    --forest:#0B3A26;
+    --forest-2:#0E2A1D;
+    --green:#29C06A;
+    --green-bright:#42E084;
+    --green-soft:rgba(41,192,106,.14);
+    --resilient:#4E9E7C;
+    --text:#EAF1EC;
+    --muted:#93A49C;
+    --faint:#5E6E66;
+    --high-bg:rgba(240,96,96,.14);   --high-fg:#F08585;
+    --med-bg:rgba(240,188,86,.13);   --med-fg:#F0C06E;
+    --work-bg:rgba(41,192,106,.15);  --work-fg:#49D68A;
+    --review-bg:rgba(240,188,86,.13);--review-fg:#F0CB7A;
+    --stuck-bg:rgba(240,96,96,.16);  --stuck-fg:#F29393;
+    --overdue:#F29393;
+    --r:16px;
+    --sans:'Helvetica Neue',Helvetica,Arial,'Segoe UI',Roboto,system-ui,sans-serif;
+    --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    font-size:14px;
+    line-height:1.45;
+    min-height:100vh;
+  }
+  .app{display:grid;grid-template-columns:266px 1fr;min-height:100vh;}
+
+  /* ---------------- Sidebar ---------------- */
+  .side{
+    background:linear-gradient(180deg,#0A0E0C 0%,#080A09 100%);
+    border-right:1px solid var(--line);
+    padding:22px 16px 28px;
+    position:sticky;top:0;height:100vh;overflow-y:auto;
+  }
+  .brand{display:flex;align-items:center;gap:12px;padding:4px 6px 20px;border-bottom:1px solid var(--line);margin-bottom:18px;}
+  .mark{
+    width:42px;height:42px;border-radius:11px;flex:0 0 auto;
+    background:linear-gradient(145deg,#31D177,#1E9E56);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 1px rgba(255,255,255,.06),0 6px 18px rgba(41,192,106,.25);
+  }
+  .mark svg{display:block;}
+  .brand .name{font-weight:800;letter-spacing:.16em;font-size:16px;color:#fff;line-height:1;}
+  .brand .sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.22em;color:var(--faint);margin-top:5px;text-transform:uppercase;}
+
+  .navgroup{margin-bottom:16px;}
+  .navlabel{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--faint);text-transform:uppercase;padding:0 8px 8px;}
+  .navitem{
+    display:flex;align-items:center;gap:11px;padding:8px 8px;border-radius:9px;
+    color:var(--muted);cursor:pointer;position:relative;margin-bottom:1px;
+    text-decoration:none;font-size:13.5px;
+  }
+  .navitem svg{width:16px;height:16px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.7;opacity:.85;}
+  .navitem:hover{background:rgba(255,255,255,.03);color:#cfd8d3;}
+  .navitem.active{background:var(--green-soft);color:#fff;}
+  .navitem.active svg{stroke:var(--green);opacity:1;}
+  .navitem.active::before{content:"";position:absolute;left:-16px;top:6px;bottom:6px;width:3px;border-radius:0 3px 3px 0;background:var(--green);}
+  .navitem .txt{flex:1;}
+  .badge{
+    font-family:var(--mono);font-size:10px;min-width:19px;height:19px;padding:0 6px;border-radius:999px;
+    display:inline-flex;align-items:center;justify-content:center;letter-spacing:.02em;
+  }
+  .badge.amber{background:rgba(240,188,86,.16);color:var(--med-fg);}
+  .badge.green{background:var(--green-soft);color:var(--work-fg);}
+  .aiflag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;padding:2px 7px;border-radius:999px;border:1px solid var(--line-2);color:var(--green);}
+
+  /* ---------------- Main ---------------- */
+  .main{padding:26px 34px 40px;max-width:1500px;}
+  .topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:26px;gap:20px;}
+  .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--faint);text-transform:uppercase;margin-bottom:7px;}
+  h1{margin:0;font-size:30px;font-weight:800;letter-spacing:-.01em;color:#fff;}
+  .topctl{display:flex;align-items:center;gap:12px;}
+  .selpill{
+    display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);
+    padding:9px 14px;border-radius:11px;font-size:13px;color:var(--text);cursor:pointer;
+  }
+  .selpill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+  .selpill svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:1.8;}
+  .bell{
+    width:40px;height:40px;border-radius:11px;background:var(--panel);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;
+  }
+  .bell svg{width:17px;height:17px;stroke:var(--muted);fill:none;stroke-width:1.7;}
+  .bell::after{content:"";position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:#F08585;box-shadow:0 0 0 2px var(--panel);}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);}
+  .grid-top{display:grid;grid-template-columns:1fr 1.18fr;gap:20px;align-items:stretch;}
+  .rightcol{display:flex;flex-direction:column;gap:20px;}
+
+  /* Lifetime savings hero */
+  .hero{
+    position:relative;overflow:hidden;padding:30px 30px 26px;display:flex;flex-direction:column;
+    background:
+      radial-gradient(120% 90% at 88% 8%,rgba(41,192,106,.16),transparent 55%),
+      var(--hero);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:34px 34px;mask-image:radial-gradient(120% 90% at 85% 0%,#000,transparent 60%);
+  }
+  .hero>*{position:relative;z-index:1;}
+  .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;color:var(--faint);text-transform:uppercase;}
+  .bignum{font-size:74px;font-weight:800;letter-spacing:-.03em;line-height:1.02;margin:12px 0 4px;color:#fff;}
+  .herodesc{color:var(--muted);font-size:14px;max-width:340px;margin-bottom:22px;}
+  .herometa{display:flex;align-items:center;gap:14px;margin-top:auto;flex-wrap:wrap;}
+  .trend{
+    display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;
+    background:var(--green-soft);color:var(--work-fg);padding:6px 11px;border-radius:8px;
+  }
+  .trend svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;}
+  .metatxt{color:var(--faint);font-family:var(--mono);font-size:11px;letter-spacing:.03em;}
+  .sparks{display:flex;align-items:flex-end;gap:7px;height:44px;margin-top:22px;}
+  .sparks i{flex:1;border-radius:4px 4px 0 0;background:var(--forest);}
+  .sparks i:nth-child(4){background:#155e3b;}
+  .sparks i:nth-child(6){background:#1c8a52;}
+  .sparks i:nth-child(7){background:#22a460;}
+  .sparks i:nth-child(8){background:var(--green);}
+
+  /* Card headers */
+  .chead{display:flex;align-items:baseline;justify-content:space-between;padding:20px 22px 0;}
+  .chead h3{margin:0;font-size:16px;font-weight:700;color:#fff;letter-spacing:.005em;}
+  .chead .fy{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--faint);}
+
+  /* Quarter chart */
+  .quarter{padding-bottom:22px;}
+  .bars{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;padding:22px 26px 0;height:210px;}
+  .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+  .bar .val{font-family:var(--mono);font-size:12px;color:var(--text);margin-bottom:10px;letter-spacing:.02em;}
+  .bar .val.est{color:var(--faint);}
+  .bar .col{width:100%;max-width:76px;border-radius:8px 8px 0 0;}
+  .bar .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--faint);margin-top:11px;}
+  .c1{height:60px;background:linear-gradient(180deg,#2f7d57,#14512f);}
+  .c2{height:96px;background:linear-gradient(180deg,#33a163,#166a3d);}
+  .c3{height:150px;background:linear-gradient(180deg,var(--green-bright),#1c8a52);}
+  .c4{height:120px;background:repeating-linear-gradient(135deg,rgba(41,192,106,.16) 0 6px,transparent 6px 12px);border:1px dashed rgba(41,192,106,.4);border-bottom:none;}
+
+  /* Targets + Outstanding row */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .cbody{padding:16px 22px 22px;}
+  .metric{display:flex;align-items:baseline;gap:10px;margin:6px 0 14px;}
+  .metric .big{font-size:34px;font-weight:800;color:#fff;letter-spacing:-.02em;}
+  .metric .lbl{font-size:13px;color:var(--muted);}
+  .metric .sep{color:var(--faint);}
+  .metric .big.blue{color:var(--green);}
+  .progress{height:7px;border-radius:999px;background:var(--forest-2);overflow:hidden;}
+  .progress i{display:block;height:100%;width:40%;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--green-bright));}
+  .pipeline{margin-top:13px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--faint);}
+  .pipeline b{color:var(--text);font-weight:600;}
+  .osrow{display:flex;gap:34px;margin:6px 0 16px;}
+  .osrow .n{font-size:34px;font-weight:800;letter-spacing:-.02em;}
+  .osrow .n.red{color:#F08585;}
+  .osrow .n.mut{color:var(--text);}
+  .osrow .k{font-size:12px;color:var(--muted);margin-top:2px;}
+  .link{font-size:12.5px;color:var(--green);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px;}
+  .link:hover{color:var(--green-bright);}
+
+  /* Hot items */
+  .hot{margin-top:20px;}
+  .hothead{display:flex;align-items:center;gap:12px;padding:20px 24px 6px;}
+  .hothead h3{margin:0;font-size:17px;font-weight:700;color:#fff;}
+  .activechip{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);border:1px solid var(--line-2);padding:3px 9px;border-radius:999px;text-transform:uppercase;}
+  .hothead .link{margin-left:auto;}
+  table{width:100%;border-collapse:collapse;}
+  thead th{
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--faint);text-transform:uppercase;
+    text-align:left;font-weight:400;padding:16px 24px 12px;border-bottom:1px solid var(--line);
+  }
+  tbody td{padding:15px 24px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--muted);vertical-align:middle;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:var(--row-hover);}
+  tbody tr.flagged{background:rgba(240,96,96,.045);}
+  td.item{color:var(--text);font-weight:500;}
+  td.owner,td.muni{color:var(--muted);}
+  .chip{font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:4px 9px;border-radius:6px;text-transform:uppercase;display:inline-block;white-space:nowrap;}
+  .chip.high{background:var(--high-bg);color:var(--high-fg);}
+  .chip.medium{background:var(--med-bg);color:var(--med-fg);}
+  .chip.work{background:var(--work-bg);color:var(--work-fg);}
+  .chip.review{background:var(--review-bg);color:var(--review-fg);}
+  .chip.stuck{background:var(--stuck-bg);color:var(--stuck-fg);}
+  .due-over{color:var(--overdue);font-weight:600;display:inline-flex;align-items:center;gap:7px;}
+  .due-over svg{width:12px;height:13px;fill:var(--overdue);}
+
+  a:focus-visible,.navitem:focus-visible,.selpill:focus-visible,.bell:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .card,.hero{animation:rise .5s ease both;}
+    .rightcol .card:nth-child(2){animation-delay:.05s;}
+    .hot{animation-delay:.1s;}
+    @keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  }
+  @media (max-width:1080px){
+    .app{grid-template-columns:1fr;}
+    .side{position:static;height:auto;}
+    .grid-top{grid-template-columns:1fr;}
+    .bignum{font-size:60px;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path d="M20 8.2A8 8 0 1 0 20.5 15H13" fill="none" stroke="#08170F" stroke-width="3.1" stroke-linecap="square"></path>
+        </svg>
+      </span>
+      <span>
+        <div class="name">GATOR</div>
+        <div class="sub">Municipal Procurement</div>
+      </span>
+    </div>
+
+    <div class="navgroup">
+      <div class="navlabel">Assistant</div>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 5.3L20 9.7l-4 3.9 1 5.6-5-2.9-5 2.9 1-5.6-4-3.9 5.8-1.4z"></path></svg><span class="txt">Snappy AI</span><span class="aiflag">AI</span></a>
+    </div>
+
+    <div class="navgroup">
+      <div class="navlabel">Dashboards</div>
+      <a class="navitem active" tabindex="0"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span class="txt">Executive Summary</span></a>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M4 20V9M10 20V4M16 20v-7M20 20H3"></path></svg><span class="txt">Spend Analysis</span></a>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M4 20V11M10 20V6M16 20v-9M20 20H3"></path></svg><span class="txt">Savings Analysis</span></a>
+    </div>
+
+    <div class="navgroup">
+      <div class="navlabel">Operations</div>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h6l-1 7 9-11h-6z"></path></svg><span class="txt">Invoicing &amp; ROI</span></a>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h6l-1 7 9-11h-6z"></path></svg><span class="txt">Outstanding Items</span><span class="badge amber">8</span></a>
+    </div>
+
+    <div class="navgroup">
+      <div class="navlabel">Project Management</div>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4-8 4-8-4z"></path><path d="M4 12l8 4 8-4M4 17l8 4 8-4"></path></svg><span class="txt">Project Information</span></a>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4-8 4-8-4z"></path><path d="M4 12l8 4 8-4M4 17l8 4 8-4"></path></svg><span class="txt">Savings Initiatives</span></a>
+    </div>
+
+    <div class="navgroup">
+      <div class="navlabel">Targets</div>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.4"></circle></svg><span class="txt">Review &amp; Edit</span><span class="badge green">3</span></a>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg><span class="txt">Vendors</span></a>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4"></path><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path></svg><span class="txt">Imports</span></a>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><path d="M12 4v11M8 11l4 4 4-4"></path><path d="M4 19h16"></path></svg><span class="txt">Upload Data</span></a>
+    </div>
+
+    <div class="navgroup">
+      <div class="navlabel">M&amp;V</div>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M9 12l2 2 4-4"></path></svg><span class="txt">M&amp;V Imports</span></a>
+    </div>
+
+    <div class="navgroup">
+      <div class="navlabel">Spend Data</div>
+      <a class="navitem" tabindex="0"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg><span class="txt">Data Sources</span></a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">Dashboards</div>
+        <h1>Executive Summary</h1>
+      </div>
+      <div class="topctl">
+        <div class="selpill" tabindex="0"><span class="dot"></span>All Municipalities<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></div>
+        <div class="bell" tabindex="0"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"></path></svg></div>
+      </div>
+    </div>
+
+    <div class="grid-top">
+      <!-- Lifetime savings hero -->
+      <section class="card hero">
+        <div class="kicker">Lifetime Savings</div>
+        <div class="bignum">$2.42M</div>
+        <div class="herodesc">Realized savings across all connected data sources and municipalities.</div>
+        <div class="herometa">
+          <span class="trend"><svg viewBox="0 0 24 24"><path d="M4 17l6-6 4 4 6-8"></path><path d="M20 7v5h-5"></path></svg>+18% vs last quarter</span>
+          <span class="metatxt">5 cities · closed before launch</span>
+        </div>
+        <div class="sparks" aria-hidden="true">
+          <i style="height:34%"></i><i style="height:40%"></i><i style="height:36%"></i>
+          <i style="height:58%"></i><i style="height:52%"></i><i style="height:74%"></i>
+          <i style="height:86%"></i><i style="height:100%"></i>
+        </div>
+      </section>
+
+      <div class="rightcol">
+        <!-- Savings by quarter -->
+        <section class="card quarter">
+          <div class="chead"><h3>Savings by Quarter</h3><span class="fy">FY 2026</span></div>
+          <div class="bars">
+            <div class="bar"><span class="val">$480K</span><span class="col c1"></span><span class="lbl">Q1</span></div>
+            <div class="bar"><span class="val">$760K</span><span class="col c2"></span><span class="lbl">Q2</span></div>
+            <div class="bar"><span class="val">$1.16M</span><span class="col c3"></span><span class="lbl">Q3</span></div>
+            <div class="bar"><span class="val est">est.</span><span class="col c4"></span><span class="lbl">Q4</span></div>
+          </div>
+        </section>
+
+        <div class="duo">
+          <!-- Targets -->
+          <section class="card">
+            <div class="chead"><h3>Targets</h3></div>
+            <div class="cbody">
+              <div class="metric"><span class="big">6</span><span class="lbl">completed</span><span class="sep">·</span><span class="lbl">9 upcoming</span></div>
+              <div class="progress"><i></i></div>
+              <div class="pipeline">Next 90 days pipeline · <b>$1.2M</b></div>
+            </div>
+          </section>
+          <!-- Outstanding -->
+          <section class="card">
+            <div class="chead"><h3>Outstanding</h3></div>
+            <div class="cbody">
+              <div class="osrow">
+                <div><div class="n red">2</div><div class="k">overdue</div></div>
+                <div><div class="n mut">6</div><div class="k">due soon</div></div>
+              </div>
+              <a class="link" href="file:///C:/Users/RVollrath/Downloads/gator_executive_summary%20(1).html#">View all items <span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hot items & alerts -->
+    <section class="card hot">
+      <div class="hothead">
+        <h3>Hot Items &amp; Alerts</h3>
+        <span class="activechip">7 Active</span>
+        <a class="link" href="file:///C:/Users/RVollrath/Downloads/gator_executive_summary%20(1).html#">View All <span aria-hidden="true">→</span></a>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Priority</th><th>Item</th><th>Municipality</th><th>Owner</th><th>Due</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="chip high">High</span></td>
+            <td class="item">Reverse auction close — Fleet fuel cards</td>
+            <td class="muni">City of Springfield</td>
+            <td class="owner">Sarah Miller</td>
+            <td>Jul 28, 2026</td>
+            <td><span class="chip work">Working on it</span></td>
+          </tr>
+          <tr>
+            <td><span class="chip high">High</span></td>
+            <td class="item">Vendor scoring due — Janitorial services</td>
+            <td class="muni">Capital City</td>
+            <td class="owner">Jack Thompson</td>
+            <td>Jul 25, 2026</td>
+            <td><span class="chip review">Needs review</span></td>
+          </tr>
+          <tr class="flagged">
+            <td><span class="chip high">High</span></td>
+            <td class="item">Savings actuals import — Q2 FY26</td>
+            <td class="muni">City of Springfield</td>
+            <td class="owner">Jack Thompson</td>
+            <td><span class="due-over">Jul 15, 2026 <svg viewBox="0 0 24 24"><path d="M5 3v18M5 4h11l-2 4 2 4H5"></path></svg></span></td>
+            <td><span class="chip stuck">Stuck</span></td>
+          </tr>
+          <tr>
+            <td><span class="chip medium">Medium</span></td>
+            <td class="item">Baseline spend sign-off — Office supplies</td>
+            <td class="muni">City of Shelbyville</td>
+            <td class="owner">Mike Chen</td>
+            <td>Aug 03, 2026</td>
+            <td><span class="chip work">Working on it</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
+
+
+</body></html>
